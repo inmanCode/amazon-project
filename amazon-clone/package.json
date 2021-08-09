@@ -10,7 +10,9 @@
     "@tailwindcss/line-clamp": "^0.2.1",
     "next": "^11.0.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-currency-formatter": "^1.1.0",
+    "react-dom": "^17.0.2",
+    "react-responsive-carousel": "^3.2.20"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",
