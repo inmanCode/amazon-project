@@ -14,13 +14,15 @@ const CheckOutProduct = ({
   category,
   image,
   hasPrime,
+  index,
 }) => {
   const [rating] = React.useState(
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
   );
   const dispatch = useDispatch();
-  const removeItemFromBasket = (id) => {
-    dispatch(removeFromBasket({ id }));
+  const removeItemFromBasket = (index) => {
+    console.log(index);
+    dispatch(removeFromBasket({ index }));
   };
   return (
     <div className='grid grid-cols-5 border-b border-gray-100 mb-1 p-2 '>
@@ -56,7 +58,7 @@ const CheckOutProduct = ({
       </div>
 
       <div className='flex flex-col space-y-2 my-auto justify-self-end'>
-        <button className='button' onClick={() => removeItemFromBasket(id)}>
+        <button className='button' onClick={() => removeItemFromBasket(index)}>
           remove from Basket
         </button>
       </div>

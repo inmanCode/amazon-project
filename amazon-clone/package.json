@@ -9,8 +9,10 @@
     "@heroicons/react": "^1.0.3",
     "@next-auth/firebase-adapter": "^0.1.2",
     "@reduxjs/toolkit": "^1.6.1",
+    "@stripe/stripe-js": "^1.16.0",
     "@tailwindcss/line-clamp": "^0.2.1",
-    "firebase": "^8.9.0",
+    "axios": "^0.21.1",
+    "firebase": "^8.9.1",
     "firebase-admin": "^9.11.0",
     "js-cookie": "^3.0.0",
     "next": "^11.0.1",
@@ -20,7 +22,8 @@
     "react-dom": "^17.0.2",
     "react-firebaseui": "^5.0.2",
     "react-redux": "^7.2.4",
-    "react-responsive-carousel": "^3.2.20"
+    "react-responsive-carousel": "^3.2.20",
+    "stripe": "^8.168.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",

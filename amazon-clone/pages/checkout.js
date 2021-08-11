@@ -5,10 +5,24 @@ import { selectItems } from '../slices/basketSlice';
 import CheckOutProduct from '../components/CheckOutProduct';
 import Currency from 'react-currency-formatter';
 import { selectTotal } from '../slices/basketSlice';
+// import { loadStripe } from '@stripe/stripe-js';
+// import axios from 'axios';
+// const stripePromise = loadStripe(
+//   'pk_live_51JN7DkIAEL0dkpKFbzGJ5YqMmkK84aTC1FFRyxjp9vvf5ZU2EiB8PnCsyEuvnsNbbHVTBWg60TjKkIhiUnn8qq1n00bS1bKWIb'
+// );
 
 const checkout = () => {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  //   const createCheckoutSession = async () => {
+  //     const stripe = await stripePromise;
+  //     const checkoutSession = await axios.post(
+  //       '/api/create-checkout-session.js',
+  //       {
+  //         items,
+  //       }
+  //     );
+  //   };
   return (
     <div className='bg-gray-100'>
       <Header />
@@ -28,9 +42,9 @@ const checkout = () => {
                 : 'Your Shopping Basket is Empty'}
             </h1>
             <div>
-              {items.map((item, i) => (
+              {items.map((item, index) => (
                 <CheckOutProduct
-                  key={i}
+                  key={index}
                   id={item.id}
                   title={item.title}
                   price={item.price}
@@ -38,7 +52,7 @@ const checkout = () => {
                   category={item.category}
                   image={item.image}
                   hasPrime={item.hasPrime}
-                  index={i}
+                  index={index}
                 />
               ))}
             </div>
@@ -54,7 +68,13 @@ const checkout = () => {
                   <Currency quantity={total} currency='GBP' />
                 </span>
               </h2>
-              <button className='button mt-2'>Proceed to ckeckout</button>
+              <button
+                role='link'
+                // onClick={createCheckoutSession}
+                className='button mt-2'
+              >
+                Proceed to ckeckout
+              </button>
             </>
           )}
         </div>

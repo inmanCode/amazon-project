@@ -12,7 +12,7 @@ export const basketSlice = createSlice({
     },
     removeFromBasket: (state, action) => {
       let newProducts = state.items.filter(
-        (item, i) => item.id !== action.payload.id
+        (item, i) => i !== action.payload.index
       );
 
       return {

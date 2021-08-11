@@ -7,10 +7,11 @@ import {
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
-
+import { signIn, signOut, useSession } from 'next-auth/client';
 const Header = () => {
   const router = useRouter();
   const items = useSelector(selectItems);
+  const [session] = useSession();
   return (
     <div>
       <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
@@ -34,8 +35,11 @@ const Header = () => {
         </div>
         {/* Right */}
         <div className='text-white flex items-center text-sx space-x-6 mx-6 whitespace-nowrap'>
-          <div className='link'>
-            <p>Welcome</p>
+          <div
+            onClick={!session ? signIn : signOut}
+            className='cursor-pointer link'
+          >
+            <p>{session ? 'hello,' + ' ' + session.user.name : 'Sign In'}</p>
             <p className='font-extrabold md:text-sm'>Account & Lists</p>
           </div>
 
