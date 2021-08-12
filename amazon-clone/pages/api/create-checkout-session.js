@@ -1,8 +1,33 @@
-const stripe = require('stripe')(
-  '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'
-);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async (req, res) => {
   const { items, email } = req.body;
-  console.log(items, email);
+  const transformedItems = items.map((item) => ({
+    description: item.description,
+    quantity: 1,
+    price_data: {
+      currency: 'EUR',
+      unit_amount: item.price * 100,
+      product_data: {
+        name: item.title,
+        images: [item.image],
+      },
+    },
+  }));
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    shipping_rates: ['shr_1JNTEoIAEL0dkpKFQ47GoOzc'],
+    shipping_address_collection: {
+      allowed_countries: ['GB', 'IT', 'US', 'CA'],
+    },
+    line_items: transformedItems,
+    mode: 'payment',
+    success_url: `${process.env.HOST}/success`,
+    cancel_url: `${process.env.HOST}/checkout`,
+    metadata: {
+      email,
+      images: JSON.stringify(items.map((item) => item.image)),
+    },
+  });
+  res.status(200).json({ id: session.id });
 };
