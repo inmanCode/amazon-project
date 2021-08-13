@@ -40,7 +40,7 @@ const Header = () => {
             className='cursor-pointer link'
           >
             <p>{session ? 'hello,' + ' ' + session.user.name : 'Sign In'}</p>
-            <p className='font-extrabold md:text-sm'>Account & Lists</p>
+            <p className='font-extrabold md:text-sm'>Account & Lists </p>
           </div>
 
           <div
