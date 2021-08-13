@@ -19,7 +19,7 @@ const checkout = () => {
 
     try {
       const checkoutSession = await axios.post(
-        `${process.env.auth_url}/api/create-checkout-session`,
+        `https://amazon-project-eed01bier-inmancode.vercel.app/api/create-checkout-session`,
         {
           items,
           email: session.user.email,
