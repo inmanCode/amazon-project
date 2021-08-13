@@ -19,9 +19,6 @@ const fullfilOrder = async (session) => {
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
-    })
-    .then(() => {
-      console.log(`sucess ${session.id} had been added to the DB`);
     });
 };
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
