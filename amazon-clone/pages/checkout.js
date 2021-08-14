@@ -19,7 +19,7 @@ const checkout = () => {
 
     try {
       const checkoutSession = await axios.post(
-        `${process.env.auth_url}api/create-checkout-session`,
+        `http://localhost:3000/api/create-checkout-session`,
         {
           items,
           email: session.user.email,
