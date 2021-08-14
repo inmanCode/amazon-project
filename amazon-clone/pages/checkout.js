@@ -8,7 +8,7 @@ import { selectTotal } from '../slices/basketSlice';
 import { useSession } from 'next-auth/client';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
-const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 const checkout = () => {
   const items = useSelector(selectItems);
@@ -16,22 +16,17 @@ const checkout = () => {
   const [session] = useSession();
   const createCheckoutSession = async () => {
     const stripe = await stripePromise;
+    const checkoutSession = await axios.post('/api/create-checkout-session', {
+      items,
+      email: session.user.email,
+    });
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
 
-    try {
-      const checkoutSession = await axios.post(
-        `${process.env.nextauth_url}/api/create-checkout-session`,
-        {
-          items,
-          email: session.user.email,
-        }
-      );
-      const result = await stripe.redirectToCheckout({
-        sessionId: checkoutSession.data.id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    if (result.error) alert(error.message);
   };
+
   return (
     <div className='bg-gray-100'>
       <Header />
