@@ -19,7 +19,7 @@ const checkout = () => {
 
     try {
       const checkoutSession = await axios.post(
-        `${NEXTAUTH_URL}api/create-checkout-session`,
+        `${process.env.nextauth_url}/api/create-checkout-session`,
         {
           items,
           email: session.user.email,

@@ -4,5 +4,6 @@ module.exports = {
   },
   env: {
     stripe_public_key: process.env.STRIPE_PUBLIC_KEY,
+    nextauth_url: process.env.NEXTAUTH_URL,
   },
 };
