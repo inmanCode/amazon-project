@@ -21,8 +21,8 @@ const fullfilOrder = async (session) => {
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
     });
 };
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const endPointSecret = process.env.STRIPE_SIGNING_SECRET;
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
+const endPointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 export default async (req, res) => {
   if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
